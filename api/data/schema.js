@@ -1,7 +1,7 @@
 'use strict';
 
-const ShipmentMock = require('./models/mocks').Shipment;
-const ProducttMock = require('./models/mocks').Product;
+// const ShipmentMock = require('./models/mocks').Shipment;
+// const ProducttMock = require('./models/mocks').Product;
 
 const schema = [`
   type Location {

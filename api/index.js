@@ -1,24 +1,24 @@
 'use strict';
 
-const apolloServer = require('apollo-server').apolloServer;
-const cors = require('cors');
-const express = require('express');
+import express from 'express';
+import { apolloExpress } from 'apollo-server';
+import { Schema, Resolvers } from './data/schema.js';
+import { Mocks } from './data/mocks.js';
+// import Resolvers from './data/resolvers';
+import Connectors from './data/connectors';
 
-const schema = require('./schema').schema;
-const resolvers = require('./schema').resolvers;
-const Shipments = require('./models/shipments');
-const Products = require('./models/products');
 
-const app = express().use('*', cors());
 
-app.use('/graphql', apolloServer({
-  schema,
-  resolvers,
-  context: {
-    Shipments: new Shipments(),
-    Products: new Products()
-  },
-  graphiql: true
+const GRAPHQL_PORT = 8080;
+
+var graphQLServer = express();
+graphQLServer.use('/graphql', apolloExpress({
+  graphiql: true,
+  pretty: true,
+  schema: Schema,
+  resolvers: Resolvers,
+  //mocks: Mocks,
 }));
-
-app.listen('8080', () => console.log('GraphQL is running | localhost:8080/graphql'));
+graphQLServer.listen(GRAPHQL_PORT, () => console.log(
+  `GraphQL Server is now running on http://localhost:${GRAPHQL_PORT}/graphql`
+));

@@ -2,6 +2,17 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.11-webpack.2.
 
+## How to get starts:
+
+So, we use Apollo for a data store. So before you start testing/deploy, run the below.
+
+```
+npm install
+npm run migrate # to migrate / create a database
+npm run seed # to add fixtures
+npm start # to start both, a server and a client
+```
+
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
