@@ -4,6 +4,10 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:client": "ng server",
+    "start:server": "nodemon api/index.js --watch api",
+    "postinstall": "typings install",
     "start": "ng serve",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
