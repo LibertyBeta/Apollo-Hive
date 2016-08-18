@@ -60,7 +60,7 @@ db.sync({ force: true }).then(()=> {
         tags: casual.words(3).split(' ').join(','),
       }).then( (post) => {
         return View.update({ postId: post.id }, { views: casual.integer(0,100)}, { upsert: true })
-        .then( (res) => console.log(res))
+        .then()
         .catch( (err) => console.log(err));
       });
     });

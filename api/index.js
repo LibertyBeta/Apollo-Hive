@@ -1,6 +1,8 @@
 'use strict';
 
 import express from 'express';
+import bodyParser from  'body-parser';
+import cors from 'cors';
 import { apolloExpress } from 'apollo-server';
 import { Schema, Resolvers } from './data/schema.js';
 import { Mocks } from './data/mocks.js';
@@ -12,7 +14,9 @@ import Connectors from './data/connectors';
 const GRAPHQL_PORT = 8080;
 
 var graphQLServer = express();
-graphQLServer.use('/graphql', apolloExpress({
+
+graphQLServer.use(cors());
+graphQLServer.use('/graphql', bodyParser.json(), apolloExpress({
   graphiql: true,
   pretty: true,
   schema: Schema,

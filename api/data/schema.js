@@ -4,6 +4,9 @@
 // const ProducttMock = require('./models/mocks').Product;
 
 const schema = [`
+  type Posts {
+    title: String !
+  }
   type Location {
     latitude: Float!
     longitude: Float!
@@ -77,6 +80,9 @@ const resolvers = {
     },
     anticipatedRevenue(_, args, context){
       return context.Products.revenue();
+    },
+    posts(_, args, context){
+      return context.Posts.all();
     }
   },
   Mutation: {
@@ -104,6 +110,9 @@ const resolvers = {
   Product: {
     costToManufacture: property('cost_to_manufacture'),
     retailPrice: property('retail_price'),
+  },
+  Posts: {
+    title :(_,args,context)=>{'bob'}
   }
 };
 
