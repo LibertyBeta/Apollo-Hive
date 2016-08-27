@@ -4,58 +4,61 @@
 // const ProducttMock = require('./models/mocks').Product;
 
 const schema = [`
-  type Posts {
-    title: String !
-  }
-  type Location {
-    latitude: Float!
-    longitude: Float!
+  type Hive {
+    id: String !,
+    name: String !
+
+    lastCollection: Date,
+    collections: [HoneyCollection]
+    queenBee: [QueenBee],
+    swarm: [Swarm]
   }
 
-  type Product {
-    sku: String!
-    name: String!
-    costToManufacture: Float!
-    retailPrice: Float!
-    quantity: Int!
+  type HoneyCollection {
+    collectedOn: Date !,
+    amount: Float !,
+    quality: String !,
   }
 
-  type Shipment {
-    id: String!
-    name: String!
-    revenue: Float
-    captain: String
-    origin: Location
-    destination: Location
-    currentLocation: Location
-    inventory: [Product]
+  type Hive {
+    id: String !,
+    name: String !
+
+    lastCollection: [HoneyCollection],
+    queenBee: [QueenBee],
+    swarm: [Swarm]
   }
+
+  type QueenBeen {
+    id: String !,
+    insceptDate: Date !,
+    qualtiy: String !,
+    notes: Array !
+  }
+
+  type Bee {
+    id: String !,
+    inceptDate: Date !,
+    producing: Boolean !,
+  }
+
+
+  type Swarm {
+    bees: [Bee]
+  }
+
+
 
   type Query {
-    # Shipments
-    shipments: [Shipment]
-    shipment (id: String!): Shipment
+    # hives
+    hives: [Hive]
+    hive (id: String!): Hive
 
-    # Products
-    products: [Product]
-    product (sku: String!): Product
 
-    # Rest
-    anticipatedRevenue: Float
   }
 
   type Mutation {
-    addProductsToShipment(
-      id: String!,
-      skus: [String]!
-    ): Shipment
 
-    addProduct(
-      name: String!
-      costToManufacture: Float!
-      retailPrice: Float!
-      quantity: Int!
-    ): Product
   }
 
   schema {
@@ -66,40 +69,33 @@ const schema = [`
 
 const resolvers = {
   Query: {
-    shipments(_, args, context) {
+    hives(_, args, context) {
       return context.Shipments.all();
     },
-    shipment(_, args, context) {
+    hive(_, args, context) {
       return context.Shipments.single(args.id);
     },
-    products(_, args, context) {
-      return context.Products.all();
-    },
-    product(_, args, context) {
-      return context.Products.single(args.sku);
-    },
-    anticipatedRevenue(_, args, context){
-      return context.Products.revenue();
-    },
-    posts(_, args, context){
-      return context.Posts.all();
-    }
+
   },
   Mutation: {
-    addProductsToShipment(_, args, context) {
-      var id = args.id;
-      var skus = args.skus;
 
-      return context.Shipments.create(id, skus);
+  },
+  Hive: {
+    id: (_, args, context) => context.Hive.id(_.id),
+    name: (_, args, context) => context.Hive.name(_.name),
+    lastCollection: (_, args, context) => context.Hive.getHoneycollection().then(honey=>{return honey.collectedOn;}),
+    queenBee: (_, args, context) =>{
+      return new Promise((resolve, reject) => {
+        setTimeout( () => reject('MongoDB timeout when fetching field views (timeout is 500ms)'), 500);
+        Queens.findOne({ hive: context.Hive.id }).then( (res) => resolve(res.queens) );
+      })
     },
-    addProduct(_, args, context) {
-      return context.Products
-        .create(args)
-        .then((sku) => {
-          return context.Products.single(sku)
-            .then((result) => result[0])
-        });
-    }
+    swarm: (_, args, context) =>{
+      return new Promise((resolve, reject) => {
+        setTimeout( () => reject('MongoDB timeout when fetching field views (timeout is 500ms)'), 500);
+        Bees.find({ hive: context.Hive.id }).then( (res) => resolve(res.Bees) );
+      })
+    },
   },
   Shipment: {
     origin: (_, args, context) => context.Shipments.origin(_.origin),

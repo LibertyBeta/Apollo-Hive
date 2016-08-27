@@ -4,80 +4,113 @@ import casual from 'casual';
 import rp from 'request-promise';
 import _ from 'lodash';
 
-const db = new Sequelize('blog', null, null, {
+const db = new Sequelize('hives', null, null, {
   dialect: 'sqlite',
-  storage: './blog.sqlite'
+  storage: './hives.sqlite'
 });
 
-const AuthorModel = db.define('author', {
-  firstName: {
+//SQL
+const HiveModel = db.define('hive', {
+  Name: {
     type: Sequelize.STRING,
   },
-  lastName: {
-    type: Sequelize.STRING,
+  lat: {
+    type: Sequelize.FLOAT,
   },
-});
-
-const PostModel = db.define('post', {
-  title: {
-    type: Sequelize.STRING,
-  },
-  text: {
-    type: Sequelize.STRING,
-  },
-  tags: {
-    type: Sequelize.STRING,
+  log: {
+    type: Sequelize.FLOAT,
   }
 });
 
+const HoneyCollectionModel = db.define('honeycollection', {
+  CollectedOn: {
+    type: Sequelize.DATE
+  },
+  Amount: {
+    type: Sequelize.FLOAT,
+  },
+  Quality: {
+    type: Sequelize.STRING(1)
+  }
+});
 
-const mongo = Mongoose.connect('mongodb://localhost/views', (err) => {
+const CustomersModel = db.define('customer', {
+  Name: {
+    type: Sequelize.STRING
+  },
+  Address: {
+    type: Sequelize.STRING
+  }
+})
+
+
+//Collections
+const mongo = Mongoose.connect('mongodb://localhost/insects', (err) => {
   if(err){
     console.error('Could not connect to MongoDB on port 27017');
   }
 });
 
-const ViewSchema = Mongoose.Schema({
-  postId: Number,
-  views: Number,
+const QueenSchema = Mongoose.Schema({
+  inceptDate: Date,
+  size: Number,
+  qualtiy: String,
+  notes: Array,
+  stages: Array,
+  hive: String,
 })
 
-const View = Mongoose.model('views', ViewSchema);
+const BeeSchema = Mongoose.Schema({
+  inceptDate: Date,
+  producing: Boolean,
+})
+
+const Queens = Mongoose.model('queen', QueenSchema);
+const Bees = Mongoose.model('bee', BeeSchema);
 // Relations
-AuthorModel.hasMany(PostModel);
-PostModel.belongsTo(AuthorModel);
+HiveModel.hasMany(HoneyCollectionModel);
+HoneyCollectionModel.belongsTo(HiveModel);
+
+CustomersModel.hasMany(HoneyCollectionModel);
 
 casual.seed(123);
 db.sync({ force: true }).then(()=> {
   _.times(10, ()=> {
-    return AuthorModel.create({
-      firstName: casual.first_name,
-      lastName: casual.last_name,
-    }).then(author => {
-      return author.createPost({
-        title: `A post by ${author.firstName} ${author.lastName}`,
-        text: casual.sentences(3),
-        tags: casual.words(3).split(' ').join(','),
-      }).then( (post) => {
-        return View.update({ postId: post.id }, { views: casual.integer(0,100)}, { upsert: true })
-        .then()
-        .catch( (err) => console.log(err));
+    //First, create a bunch of random CustomersModel
+    let customers = [];
+    _.times(20, ()=>{
+      return CustomersModel.create({
+        Name: casual.Name,
+        Address: casual.address,
+      }).then(customer=> customers.push(customer));
+    });
+
+    return HiveModel.create({
+      Name: casual.title ,
+      lat: casual.latitude,
+      log: casual.longitude
+    }).then(Hive => {
+      _.times(5, ()=>{
+        // console.log(Hive);
+        return Hive.createHoneycollection({
+          collectedOn: casual.unix_time ,
+          amount: 1,
+          qualtiy: 1,
+        }).then(Honey => {
+          _.times(5, ()=>{
+            let randomCustomer = customers[Math.floor(Math.random()*customers.length)];
+            randomCustomer.setHoneycollections(Honey);
+          });
+        })
       });
     });
   });
 });
 
-const Author = db.models.author;
-const Post = db.models.post;
 
-const FortuneCookie = {
-  getOne(){
-    return rp('http://fortunecookieapi.com/v1/cookie')
-      .then((res) => JSON.parse(res))
-      .then((res) => {
-        return res[0].fortune.message;
-      });
-  },
-};
+const Hive = db.models.hive;
+const HoneyCollection = db.models.honecollection;
+const Customer = db.models.customer;
 
-export { Author, Post, View, FortuneCookie };
+
+export {  };

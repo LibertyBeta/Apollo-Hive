@@ -24,6 +24,7 @@
     "@angular/platform-browser": "2.0.0-rc.5",
     "@angular/platform-browser-dynamic": "2.0.0-rc.5",
     "@angular/router": "3.0.0-rc.1",
+    "@types/isomorphic-fetch": "0.0.30",
     "angular2-apollo": "^0.4.3",
     "apollo-client": "^0.4.11",
     "apollo-server": "^0.2.5",
