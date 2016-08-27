@@ -10,6 +10,8 @@ import { Mocks } from './data/mocks.js';
 import Resolvers from './data/resolvers';
 import Connectors from './data/connectors';
 
+console.log(Connectors);
+
 const executableSchema = makeExecutableSchema({
   typeDefs: Schema,
   resolvers: Resolvers,

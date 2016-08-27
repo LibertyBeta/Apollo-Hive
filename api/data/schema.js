@@ -6,12 +6,8 @@
 const Schema = [`
   type Hive {
     id: String ,
-    name: String 
-
+    name: String
     lastCollection: String,
-    collections: [HoneyCollection]
-    queenBee: [QueenBee],
-    swarm: [Swarm]
   }
 
   type HoneyCollection {
@@ -25,7 +21,7 @@ const Schema = [`
     id: String ,
     insceptDate: String ,
     qualtiy: String ,
-    notes: [String] 
+    notes: [String]
   }
 
   type Bee {

@@ -1,10 +1,14 @@
 const Resolvers = {
   Query: {
     hives(_, args, context) {
-      return context.Shipments.all();
+      return context.connectors.HiveConnector.all().then(data=>{
+        console.log(data);
+        return data;
+      })
+
     },
     hive(_, args, context) {
-      return context.Shipments.single(args.id);
+      return context.HiveConnector.single(args.id);
     },
 
   },
@@ -18,21 +22,10 @@ const Resolvers = {
 
 
   Hive: {
-    id: (_, args, context) => context.Hive.id(_.id),
-    name: (_, args, context) => context.Hive.name(_.name),
+    id: (_, args, context) => _.id,
+    name: (_, args, context) => _.Name,
     lastCollection: (_, args, context) => context.Hive.getHoneycollection().then(honey=>{return honey.collectedOn;}),
-    queenBee: (_, args, context) =>{
-      return new Promise((resolve, reject) => {
-        setTimeout( () => reject('MongoDB timeout when fetching field views (timeout is 500ms)'), 500);
-        Queens.findOne({ hive: context.Hive.id }).then( (res) => resolve(res.queens) );
-      })
-    },
-    swarm: (_, args, context) =>{
-      return new Promise((resolve, reject) => {
-        setTimeout( () => reject('MongoDB timeout when fetching field views (timeout is 500ms)'), 500);
-        Bees.find({ hive: context.Hive.id }).then( (res) => resolve(res.Bees) );
-      })
-    },
+
   },
 
   HoneyCollection: {
@@ -63,4 +56,4 @@ const Resolvers = {
 
 };
 
-export default [Resolvers]
+export default Resolvers;
