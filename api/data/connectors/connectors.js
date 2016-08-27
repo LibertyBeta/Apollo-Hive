@@ -46,7 +46,7 @@ const Customer = db.models.customer;
 
 const Connectors = {
   Hives: HiveModel,
-  HoneyCollection: HoneyCollectionModel,
+  HoneyHarvest: HoneyHarvestConnector,
   Customer: CustomersModel,
   Queens,
   Bees,

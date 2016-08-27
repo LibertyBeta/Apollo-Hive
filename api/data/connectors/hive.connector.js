@@ -1,9 +1,13 @@
-import {db, HiveModel} from "./datasources/sql.datastore"
+import {db, HiveModel, HoneyHarvestModel} from "./datasources/sql.datastore"
 
 export default class HiveConnector {
 
   constructor() {
     this.Hives = HiveModel;
+  }
+
+  get(value){
+    return value;
   }
 
   id(arg){
@@ -16,7 +20,7 @@ export default class HiveConnector {
   }
 
   all(){
-    return this.Hives.findAll()
+    return this.Hives.findAll({include:[HoneyHarvestModel]})
       .then(findResult=>{
         let flat = [];
         for(let result of findResult){
@@ -28,8 +32,17 @@ export default class HiveConnector {
 
   }
 
-  single(){
-    return {};
+  single(id){
+    return this.Hives.findById(id,{include:[HoneyHarvestModel]}).then(instance=>instance.get());
   }
 
+
+  flatten(fieldSet){
+    let flat = [];
+    for(let result of fieldSet){
+      flat.push(result.get());
+    }
+    // console.log(flat);
+    return flat;
+  }
 }

@@ -1,14 +1,11 @@
 const Resolvers = {
   Query: {
     hives(_, args, context) {
-      return context.connectors.HiveConnector.all().then(data=>{
-        console.log(data);
-        return data;
-      })
-
+      return context.connectors.HiveConnector.all();
     },
     hive(_, args, context) {
-      return context.HiveConnector.single(args.id);
+      console.log(args);
+      return context.connectors.HiveConnector.single(args.id);
     },
 
   },
@@ -25,13 +22,19 @@ const Resolvers = {
     id: (_, args, context) => _.id,
     name: (_, args, context) => _.Name,
     lastCollection: (_, args, context) => context.Hive.getHoneycollection().then(honey=>{return honey.collectedOn;}),
-
+    harvests: (_, ars, context) => {
+      let flat = [];
+      for(let result of _.honeyharvests){
+        flat.push(result.get());
+      }
+      return flat;
+    }
   },
 
-  HoneyCollection: {
-    collectedOn:(_, args, context)=>{return null},
-    amount:(_, args, context)=>{return null},
-    quality:(_, args, context)=>{return null},
+  HoneyHarvest: {
+    collectedOn:(_, args, context)=>_.CollectedOn,
+    amount:(_, args, context)=> _.Amount,
+    quality:(_, args, context)=> _.Quality,
   },
 
 

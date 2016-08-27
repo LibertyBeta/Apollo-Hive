@@ -8,9 +8,10 @@ const Schema = [`
     id: String ,
     name: String
     lastCollection: String,
+    harvests: [HoneyHarvest]
   }
 
-  type HoneyCollection {
+  type HoneyHarvest {
     collectedOn: String ,
     amount: Float ,
     quality: String ,
