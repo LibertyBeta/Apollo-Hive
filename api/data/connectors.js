@@ -6,7 +6,8 @@ import _ from 'lodash';
 
 const db = new Sequelize('hives', null, null, {
   dialect: 'sqlite',
-  storage: './hives.sqlite'
+  storage: './hives.sqlite',
+  logging: false,
 });
 
 //SQL
@@ -61,6 +62,7 @@ const QueenSchema = Mongoose.Schema({
 })
 
 const BeeSchema = Mongoose.Schema({
+  hive: String,
   inceptDate: Date,
   producing: Boolean,
 })
