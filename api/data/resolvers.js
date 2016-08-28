@@ -4,7 +4,7 @@ const Resolvers = {
       return context.connectors.HiveConnector.all();
     },
     hive(_, args, context) {
-      console.log(args);
+      console.log("HIVE?",args);
       return context.connectors.HiveConnector.single(args.id);
     },
 
@@ -13,7 +13,11 @@ const Resolvers = {
 
   Mutation: {
     killBee(_, args, context){
-      return false;
+
+      return context.connectors.BeeConnector.remove(args.id);
+    },
+    purgeSwarm(_, args, context){
+      return context.connectors.BeeConnector.purge(args.hiveId);
     }
   },
 
@@ -22,13 +26,19 @@ const Resolvers = {
     id: (_, args, context) => _.id,
     name: (_, args, context) => _.Name,
     lastCollection: (_, args, context) => context.Hive.getHoneycollection().then(honey=>{return honey.collectedOn;}),
-    harvests: (_, ars, context) => {
+    harvests: (_, args, context) => {
       let flat = [];
-      for(let result of _.honeyharvests){
-        flat.push(result.get());
+      for(let harvest of _.honeyharvests){
+        flat.push(harvest.get());
       }
       return flat;
-    }
+    },
+    bees: (_, args, context) =>{
+      return context.connectors.BeeConnector.swarm(_.id);
+    },
+    queen: (_, args, context) =>{
+      return context.connectors.BeeConnector.queen(_.id);
+    },
   },
 
   HoneyHarvest: {
@@ -39,21 +49,21 @@ const Resolvers = {
 
 
   QueenBee: {
-    id:(_, args, context)=>{return null},
-    insceptDate:(_, args, context)=>{return null},
-    qualtiy:(_, args, context)=>{return null},
-    notes: (_, args, context)=>{return null},
+    id:(_, args, context)=>_._id,
+    insceptDate:(_, args, context)=>new Date(_.inceptDate),
+    qualtiy:(_, args, context)=>_.quality,
+    notes: (_, args, context)=>_.notes,
   },
 
   Bee: {
-    id:(_, args, context)=>{return null},
-    inceptDate:(_, args, context)=>{return null},
-    producing:(_, args, context)=>{return null},
+    id:(_, args, context)=>{console.log("Hello");return _._id},
+    inceptDate:(_, args, context)=>{return new Date(_.inceptDate)},
+    producing:(_, args, context)=>_.producing,
   },
 
 
   Swarm: {
-    bees: (_, args, context)=>{return null},
+    bees: (_, args, context)=>{return context.connectors.BeeConnector.swarm(args.id);},
   },
 
 

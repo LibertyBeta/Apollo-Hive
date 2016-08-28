@@ -8,7 +8,9 @@ const Schema = [`
     id: String ,
     name: String
     lastCollection: String,
-    harvests: [HoneyHarvest]
+    harvests: [HoneyHarvest],
+    queen: [QueenBee],
+    bees: [Bee]
   }
 
   type HoneyHarvest {
@@ -49,7 +51,10 @@ const Schema = [`
   type Mutation {
     killBee(
       id: String ,
-    ): Boolean
+    ): Boolean,
+    purgeSwarm(
+      id: String,
+    ): Swarm
   }
 
   schema {

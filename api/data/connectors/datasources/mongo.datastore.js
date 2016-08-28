@@ -1,3 +1,8 @@
+import Mongoose from 'mongoose';
+import _ from "lodash";
+
+Mongoose.Promise = global.Promise;
+
 //Collections
 const mongo = Mongoose.connect('mongodb://localhost/insects', (err) => {
   if(err){
@@ -22,5 +27,13 @@ const BeeSchema = Mongoose.Schema({
 
 const Queens = Mongoose.model('queen', QueenSchema);
 const Bees = Mongoose.model('bee', BeeSchema);
+
+_.times(100, (iteration)=>{
+  new Bees({
+    hive:1,
+    inceptDate: new Date(),
+    producing: true,
+  }).save();
+})
 
 export {Queens, Bees};

@@ -1,6 +1,7 @@
-import HiveConnector from "./hive.connector";
 import _ from "lodash";
 import casual from "casual";
+import HiveConnector from "./hive.connector";
+import BeeConnector from "./bee.connector";
 import {db, HiveModel, CustomersModel, HoneyHarvestModel} from "./datasources/sql.datastore";
 
 casual.seed(123);
@@ -39,7 +40,7 @@ db.sync({ force: true }).then(()=> {
 
 const Connectors = {
   HiveConnector,
-
+  BeeConnector
 };
 
 export default Connectors

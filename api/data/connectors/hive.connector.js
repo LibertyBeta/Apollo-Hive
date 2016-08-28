@@ -1,4 +1,6 @@
-import {db, HiveModel, HoneyHarvestModel} from "./datasources/sql.datastore"
+import {db, HiveModel, HoneyHarvestModel} from "./datasources/sql.datastore";
+import {Bees, Queens} from "./datasources/mongo.datastore";
+
 
 export default class HiveConnector {
 
@@ -44,5 +46,12 @@ export default class HiveConnector {
     }
     // console.log(flat);
     return flat;
+  }
+
+  swarm(id){
+    return Bees.find({hive:id}).exec().then(res=>{
+      return res;
+    })
+    // return [];
   }
 }
