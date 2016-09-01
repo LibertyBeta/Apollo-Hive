@@ -40,7 +40,7 @@ export class AppComponent {
 			}
 		})
 			.then(({ data }) => {
-				console.log(data);
+				console.info(data);
 			});
 	}
 	title = 'app works! for now';
