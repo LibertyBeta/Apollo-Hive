@@ -7,7 +7,11 @@
     {
       "main": "src/main.ts",
       "tsconfig": "src/tsconfig.json",
-      "mobile": false
+      "mobile": false,
+      "styleExt": "scss",
+      "styles":[
+        "../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss"
+      ]
     }
   ],
   "addons": [],
@@ -25,7 +29,7 @@
   "defaults": {
     "prefix": "app",
     "sourceDir": "src",
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false,
     "lazyRoutePrefix": "+"
   }

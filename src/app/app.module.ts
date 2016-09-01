@@ -6,15 +6,16 @@ import { ApolloModule, defaultApolloClient, ApolloQueryObservable } from 'angula
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 
 import { AppComponent } from './app.component';
+import { HiveComponent } from './components/hive/hive.component';
+import { BeeComponent } from './components/bee/bee.component';
+import { QueenComponent } from './components/queen/queen.component';
 
 const client = new ApolloClient({
   networkInterface: createNetworkInterface('http://localhost:8080/graphql')
 });
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [ AppComponent, HiveComponent, BeeComponent, QueenComponent ],
   imports: [
     BrowserModule,
     FormsModule,

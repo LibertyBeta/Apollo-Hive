@@ -1,32 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Angular2Apollo, ApolloQueryObservable } from 'angular2-apollo';
 import 'rxjs';
-
 import gql from 'graphql-tag';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+	selector: 'app-root',
+	templateUrl: 'app.component.html',
+	styleUrls: ['app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  posts: any[] = [];
-  constructor(private angularApollo : Angular2Apollo) {
-    angularApollo.query({
-      query: gql`
-        query getPosts($tag: String) {
-          posts(tag: $tag) {
-            title
+	posts: any[] = [];
+	constructor(private angularApollo: Angular2Apollo) {
+		angularApollo.query({
+			query: gql`
+      {
+        hives{
+          id
+          name
+
+          harvests{
+            collectedOn
+          }
+          queen{
+            id
+            insceptDate
+          }
+          lastCollection
+          bees{
+            id
+            inceptDate
+            producing
           }
         }
-      `,
-      variables: {
-        tag: '1234'
       }
-    })
-      .then(({ data }) => {
-        this.posts = data;
-      });
-  }
-  title = 'app works! for now';
+      `,
+			variables: {
+
+			}
+		})
+			.then(({ data }) => {
+				console.log(data);
+			});
+	}
+	title = 'app works! for now';
 }

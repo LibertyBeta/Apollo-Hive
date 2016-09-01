@@ -25,7 +25,7 @@ const Resolvers = {
   Hive: {
     id: (_, args, context) => _.id,
     name: (_, args, context) => _.Name,
-    lastCollection: (_, args, context) => context.Hive.getHoneycollection().then(honey=>{return honey.collectedOn;}),
+    lastCollection: (_, args, context) => context.connectors.HiveConnector.getLastHarvest(_.id),
     harvests: (_, args, context) => {
       let flat = [];
       for(let harvest of _.honeyharvests){

@@ -38,6 +38,9 @@ export default class HiveConnector {
     return this.Hives.findById(id,{include:[HoneyHarvestModel]}).then(instance=>instance.get());
   }
 
+  getLastHarvest(id){
+    return new Date();
+  }
 
   flatten(fieldSet){
     let flat = [];
