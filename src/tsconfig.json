@@ -12,14 +12,10 @@
     "target": "es5",
     "typeRoots": [
       "../node_modules/@types",
-      "../node_modules/apollo-client/**",
-      "../typings"
+      "../node_modules/apollo-client/**"
     ],
     "types": [
-      "jasmine",
-      "graphql",
-      "RequestInit",
-      "IResponse"
+      "jasmine"
     ]
   }
 }

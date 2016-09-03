@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import {ActivatedRoute } from '@angular/router';
 import { Angular2Apollo, ApolloQueryObservable } from 'angular2-apollo';
 import 'rxjs';
 import gql from 'graphql-tag';
@@ -10,38 +11,16 @@ import gql from 'graphql-tag';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-	posts: any[] = [];
-	constructor(private angularApollo: Angular2Apollo) {
-		angularApollo.query({
-			query: gql`
-      {
-        hives{
-          id
-          name
+	private title: string = 'Loading...';
+	private hives: Array<any> = Array<any>();
+	private focus: string = '';
+	private showAll:boolean = true;
+	constructor() {
 
-          harvests{
-            collectedOn
-          }
-          queen{
-            id
-            insceptDate
-          }
-          lastCollection
-          bees{
-            id
-            inceptDate
-            producing
-          }
-        }
-      }
-      `,
-			variables: {
-
-			}
-		})
-			.then(({ data }) => {
-				console.info(data);
-			});
 	}
-	title = 'app works! for now';
+
+	ngOnInit() {
+		this.title = "loaded";
+  }
+
 }
