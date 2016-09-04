@@ -15,12 +15,9 @@ export class HiveDetailsComponent implements OnInit {
 
   ngOnInit() {
       this.title = 'app works! for now';
-      // console.log(this.router.routerState.params.);
-      let self = this;
       this.route.params.subscribe(params => {
         this.childWatcher.sendToParent(this.route.parent.component.name, params['id']);
-
-     });
+      });
   }
 
 }

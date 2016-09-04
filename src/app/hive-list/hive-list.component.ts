@@ -18,7 +18,7 @@ export class HiveListComponent implements OnInit {
   private hives: Array<any> = Array<any>();
   private focus: number;
   private showAll:boolean = true;
-  private sub: Subscription;
+  private sub: Observable<any>;
   constructor(private angularApollo: Angular2Apollo,  private childWater: ChildWatchService) {
     this.sub = childWater.registerParent('HiveListComponent');
     angularApollo.query({
@@ -55,11 +55,12 @@ export class HiveListComponent implements OnInit {
       });
 
 
-  
+
   }
 
   ngOnInit() {
     this.title = 'app works! for now';
+    console.log(this.sub);
     this.sub.subscribe(value=>{
       console.log(value);
     });
