@@ -1,3 +1,10 @@
-<p>
-  hive-details works!
-</p>
+
+Some Details YO.
+Map:
+
+{{hive.location.lat}}
+{{hive.location.lng}}
+<sebm-google-map [latitude]="hive.location.lat" [longitude]="hive.location.lng" [zoom]="1" style="height:300px;">
+  <sebm-google-map-marker [latitude]="hive.location.lat" [longitude]="hive.location.lng" [label]="hive.name">
+   </sebm-google-map-marker>
+ </sebm-google-map>

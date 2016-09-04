@@ -1,11 +1,7 @@
-<div>
+
   Hi world;
   {{id}}
-  <section *ngFor="let hive of hives">
-    {{showAll}}
-    {{focus == hive.id}}
-    
-    <app-hive *ngIf="showAll || focus == hive.id" [hive]=hive >loading...</app-hive>
+  <section id="list">
+    <app-hive *ngFor="let hive of hives" [hive]=hive >loading...</app-hive>
   </section>
   <router-outlet></router-outlet>
-</div>

@@ -14,7 +14,7 @@ const HiveModel = db.define('hive', {
   lat: {
     type: Sequelize.FLOAT,
   },
-  log: {
+  lng: {
     type: Sequelize.FLOAT,
   }
 });

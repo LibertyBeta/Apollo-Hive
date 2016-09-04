@@ -13,7 +13,7 @@ export default class HiveConnector {
   }
 
   id(arg){
-    console.log(arg);
+
     return 0;
   }
 
@@ -57,4 +57,5 @@ export default class HiveConnector {
     })
     // return [];
   }
+
 }

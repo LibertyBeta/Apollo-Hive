@@ -8,11 +8,16 @@ const Schema = [`
     id: String ,
     name: String
     lastCollection: String,
+    location: HiveLocation,
     harvests: [HoneyHarvest],
     queen: [QueenBee],
     bees: [Bee]
   }
 
+  type HiveLocation {
+    lat: Float,
+    lng: Float
+  }
   type HoneyHarvest {
     collectedOn: String ,
     amount: Float ,

@@ -4,7 +4,7 @@ import HiveConnector from "./hive.connector";
 import BeeConnector from "./bee.connector";
 import {db, HiveModel, CustomersModel, HoneyHarvestModel} from "./datasources/sql.datastore";
 
-casual.seed(123);
+// casual.seed(123);
 db.sync({ force: true }).then(()=> {
   _.times(10, ()=> {
     //First, create a bunch of random CustomersModel
@@ -19,7 +19,7 @@ db.sync({ force: true }).then(()=> {
     return HiveModel.create({
       Name: casual.title ,
       lat: casual.latitude,
-      log: casual.longitude
+      lng: casual.longitude
     }).then(Hive => {
       _.times(5, ()=>{
         // console.log(Hive);

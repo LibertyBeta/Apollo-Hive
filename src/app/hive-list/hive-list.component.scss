@@ -1,0 +1,16 @@
+@import '../shared/bonbons.scss';
+:host{
+  height: 100%;
+  background-color:pink;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+#list{
+  flex:1;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}

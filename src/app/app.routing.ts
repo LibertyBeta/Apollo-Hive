@@ -12,9 +12,9 @@ const landingRoutes: Routes = [
     component: HiveListComponent,
     children:[
 
-      { path:':id/details', component: EmptyComponent }
-      { path:':id', component: HiveDetailsComponent }
-      { path: '', component: EmptyComponent },
+      { path:':id/details', component: EmptyComponent },
+      { path:':id', component: HiveDetailsComponent },
+      { path: '', component: EmptyComponent }
 
     ]
   },

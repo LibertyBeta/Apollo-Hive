@@ -37,7 +37,6 @@ export default class BeeConnector {
 
   swarm(id){
     return this.bees.find({hive:id}).exec().then(res=>{
-      console.log(res);
       return res;
     })
     // return [];

@@ -5,6 +5,7 @@ const Resolvers = {
     },
     hive(_, args, context) {
       console.log("HIVE?",args);
+      if(!args.id) console.log("Wufl");
       return context.connectors.HiveConnector.single(args.id);
     },
 
@@ -33,6 +34,9 @@ const Resolvers = {
       }
       return flat;
     },
+    location: (_, args, context)=>{
+      return _;
+    },
     bees: (_, args, context) =>{
       return context.connectors.BeeConnector.swarm(_.id);
     },
@@ -56,7 +60,7 @@ const Resolvers = {
   },
 
   Bee: {
-    id:(_, args, context)=>{console.log("Hello");return _._id},
+    id:(_, args, context)=>{return _._id},
     inceptDate:(_, args, context)=>{return new Date(_.inceptDate)},
     producing:(_, args, context)=>_.producing,
   },
@@ -66,6 +70,10 @@ const Resolvers = {
     bees: (_, args, context)=>{return context.connectors.BeeConnector.swarm(args.id);},
   },
 
+  HiveLocation: {
+    lat: (_, args, context) => _.lat,
+    lng: (_, args, context) => _.lng
+  }
 
 };
 

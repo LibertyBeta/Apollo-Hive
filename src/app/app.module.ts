@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { routing,appRoutingProviders } from './app.routing';
 import { ApolloModule, defaultApolloClient, ApolloQueryObservable } from 'angular2-apollo';
+import { AgmCoreModule, MapsAPILoader } from 'angular2-google-maps/core';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 
 import { AppComponent } from './app.component';
@@ -23,13 +24,14 @@ const client = new ApolloClient({
 @NgModule({
   declarations: [ AppComponent, HiveComponent, BeeComponent, QueenComponent, HiveDetailsComponent, EmptyComponent, HiveListComponent ],
   imports: [
+    AgmCoreModule.forRoot(),
     routing,
     BrowserModule,
     FormsModule,
     HttpModule,
-    ApolloModule,
+    ApolloModule
   ],
-  providers: [ appRoutingProviders,defaultApolloClient(client) ,ChildWatchService],
+  providers: [appRoutingProviders,defaultApolloClient(client), ChildWatchService],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
