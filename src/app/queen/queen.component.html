@@ -1,3 +1,7 @@
-<p>
-  queen works!
-</p>
+Queen Bee for Hive {{hiveName}}
+<h4>ID: {{queen.id}}</h4>
+<h5>Incept Date: {{queen.insceptDate}}</h5>
+<h5>Notes:</h5>
+<ul>
+  <li *ngFor="let note of queen.notes">{{note}}</li>
+</ul>

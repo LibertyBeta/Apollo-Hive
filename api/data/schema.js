@@ -11,7 +11,8 @@ const Schema = [`
     location: HiveLocation,
     harvests: [HoneyHarvest],
     queen: [QueenBee],
-    bees: [Bee]
+    bees: [Bee],
+    weather: Weather
   }
 
   type HiveLocation {
@@ -28,8 +29,8 @@ const Schema = [`
   type QueenBee {
     id: String ,
     insceptDate: String ,
-    qualtiy: String ,
-    notes: [String]
+    qualtiy: [String] ,
+    notes: [String]!
   }
 
   type Bee {
@@ -43,13 +44,20 @@ const Schema = [`
     bees: [Bee]
   }
 
+  type Weather {
+    condition: String,
+    temperature: Float,
+    coniditonString: String,
+    wind: String,
+  }
+
 
 
   type Query {
     # hives
     hives: [Hive]
     hive (id: String): Hive
-
+    queen(id: String): QueenBee
 
   }
 

@@ -1,0 +1,13 @@
+@import '../shared/bonbons.scss';
+:host{
+  display: block;
+  width: 100%;
+  color:black;
+  min-height: 10rem;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  background-color: white;
+  border-radius: 5px;
+
+  box-shadow:$nintendo-shadow;
+}

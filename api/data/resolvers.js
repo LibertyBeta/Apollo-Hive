@@ -8,6 +8,11 @@ const Resolvers = {
       if(!args.id) console.log("Wufl");
       return context.connectors.HiveConnector.single(args.id);
     },
+    queen(_, args, context){
+      console.log("QUEEN!", args);
+      if(!args.id) console.log("qulf");
+      return context.connectors.BeeConnector.singleQueen(args.id);
+    }
 
   },
 
@@ -43,6 +48,9 @@ const Resolvers = {
     queen: (_, args, context) =>{
       return context.connectors.BeeConnector.queen(_.id);
     },
+    weather: (_, args, context)=>{
+      return context.connectors.HiveConnector.weather(_.id, _.lat, _.lng);
+    }
   },
 
   HoneyHarvest: {
@@ -53,10 +61,14 @@ const Resolvers = {
 
 
   QueenBee: {
-    id:(_, args, context)=>_._id,
+    id:(_, args, context)=> _._id,
     insceptDate:(_, args, context)=>new Date(_.inceptDate),
     qualtiy:(_, args, context)=>_.quality,
-    notes: (_, args, context)=>_.notes,
+    notes: (_, args, context)=>{
+      console.log(_.notes);
+      console.log(typeof _.notes);
+      return _.notes
+    }
   },
 
   Bee: {
@@ -73,7 +85,15 @@ const Resolvers = {
   HiveLocation: {
     lat: (_, args, context) => _.lat,
     lng: (_, args, context) => _.lng
+  },
+
+  Weather: {
+    condition: (_, args, context)=> _.summary,
+    temperature: (_, args, context)=> _.temperature,
+    coniditonString: (_, args, context)=>_.icon,
+    wind: (_, args, context)=>_.windSpeed,
   }
+
 
 };
 

@@ -3,6 +3,7 @@ import casual from "casual";
 import HiveConnector from "./hive.connector";
 import BeeConnector from "./bee.connector";
 import {db, HiveModel, CustomersModel, HoneyHarvestModel} from "./datasources/sql.datastore";
+import {Bees, Queens} from "./datasources/mongo.datastore";
 
 // casual.seed(123);
 db.sync({ force: true }).then(()=> {
@@ -21,6 +22,24 @@ db.sync({ force: true }).then(()=> {
       lat: casual.latitude,
       lng: casual.longitude
     }).then(Hive => {
+      //Create a Bee.
+      _.times(100, (iteration)=>{
+        new Bees({
+          hive:Hive.id,
+          inceptDate: new Date(),
+          producing: casual.coin_flip ,
+        }).save();
+      });
+      new Queens({
+        inceptDate: new Date(),
+        size: casual.integer(1, 10),
+        qualtiy: casual.catch_phrase,
+        notes: casual.array_of_words(7),
+        stages: casual.array_of_words(7),
+        hive: Hive.id,
+      }).save();
+
+      //Create a Queen.
       _.times(5, ()=>{
         // console.log(Hive);
         return Hive.createHoneyharvest({

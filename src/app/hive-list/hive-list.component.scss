@@ -1,6 +1,7 @@
 @import '../shared/bonbons.scss';
 :host{
   height: 100%;
+  overflow: scroll;
   background-color:pink;
   display: flex;
   justify-content: flex-start;
@@ -9,8 +10,14 @@
 }
 #list{
   flex:1;
+  // height: 100%;
+  overflow: scroll;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
+}
+h1{
+  width: 100%;
+  text-align: center;
 }

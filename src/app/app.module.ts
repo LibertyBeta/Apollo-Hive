@@ -15,16 +15,27 @@ import { HiveDetailsComponent } from './hive-details/hive-details.component';
 import { EmptyComponent } from './empty/empty.component';
 import { HiveListComponent } from './hive-list/hive-list.component';
 
-import { ChildWatchService } from './services/child-watch.service'
+import { ChildWatchService } from './services/child-watch.service';
+
 
 const client = new ApolloClient({
   networkInterface: createNetworkInterface('http://localhost:8080/graphql')
 });
 
 @NgModule({
-  declarations: [ AppComponent, HiveComponent, BeeComponent, QueenComponent, HiveDetailsComponent, EmptyComponent, HiveListComponent ],
+  declarations: [
+    AppComponent,
+    HiveComponent,
+    BeeComponent,
+    QueenComponent,
+    HiveDetailsComponent,
+    EmptyComponent,
+    HiveListComponent
+  ],
   imports: [
-    AgmCoreModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyAydQXFOoZCCIJ5yh-Bs57p9ula3ekAtOY"
+    }),
     routing,
     BrowserModule,
     FormsModule,

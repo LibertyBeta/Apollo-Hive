@@ -47,6 +47,16 @@ export default class BeeConnector {
   }
 
   queen(hiveId){
-    return this.queens.find({hive:hiveId}).exec().then(res=>{return res});
+    return this.queens.find({hive:hiveId}).exec().then(res=>{
+
+      return res
+    });
+  }
+
+  singleQueen(queenId){
+    return this.queens.findById(queenId).exec().then(res=>{
+
+      return res;
+    });
   }
 }

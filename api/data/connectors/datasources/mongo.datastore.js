@@ -28,12 +28,5 @@ const BeeSchema = Mongoose.Schema({
 const Queens = Mongoose.model('queen', QueenSchema);
 const Bees = Mongoose.model('bee', BeeSchema);
 
-_.times(100, (iteration)=>{
-  new Bees({
-    hive:1,
-    inceptDate: new Date(),
-    producing: true,
-  }).save();
-})
 
 export {Queens, Bees};

@@ -2,4 +2,12 @@
 :host{
   // width: 75rem;
   flex:3;
+  padding: 2rem;
+}
+
+#bees{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }

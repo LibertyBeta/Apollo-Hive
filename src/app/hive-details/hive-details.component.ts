@@ -15,10 +15,14 @@ import {SebmGoogleMap, SebmGoogleMapMarker} from 'angular2-google-maps/core';
 export class HiveDetailsComponent implements OnInit {
   hiveId: Subject<string> = new Subject<string>();
   hiveQuery: any;
+  queenId: string;
   hive:any ={
     location:{
       lat:0,
       lng:0,
+    },
+    queen:{
+      id: null,
     }
 
     name:""
@@ -39,7 +43,6 @@ export class HiveDetailsComponent implements OnInit {
               }
               queen{
                 id
-                insceptDate
               }
               lastCollection
               location{
@@ -67,6 +70,7 @@ export class HiveDetailsComponent implements OnInit {
     this.hiveQuery.subscribe((event)=>{
       if(!event.loading){
         this.hive = event.data.hive;
+        this.queenId = event.data.hive.queen[0].id;
         console.log(event.data.hive);
       }
       console.log(event);

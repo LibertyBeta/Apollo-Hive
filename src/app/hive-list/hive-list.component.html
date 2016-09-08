@@ -1,7 +1,5 @@
-
-  Hi world;
-  {{id}}
-  <section id="list">
-    <app-hive *ngFor="let hive of hives" [hive]=hive >loading...</app-hive>
-  </section>
-  <router-outlet></router-outlet>
+<section id="list">
+  <h1> Hives </h1>
+  <app-hive *ngFor="let hive of hives" [hive]=hive >loading...</app-hive>
+</section>
+<router-outlet></router-outlet>
