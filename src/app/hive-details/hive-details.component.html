@@ -4,13 +4,15 @@ Map:
   <sebm-google-map-marker [latitude]="hive.location.lat" [longitude]="hive.location.lng" [label]="hive.name">
   </sebm-google-map-marker>
 </sebm-google-map>
-Queen Bee:
+<div id="row-two">
 
-{{queenId}}
-<app-queen [id]='queenId' [hiveName]='hive.name'>Loading...</app-queen>
-Bees:
+  <app-queen [id]='queenId' [hiveName]='hive.name'>Loading...</app-queen>
+  <div id="weather">
+    {{hive.weather.condition}}
+    {{hive.weather.temperature}}
+  </div>
+</div>
+Bees:<button (click)="purgeSwarm()">Purge the Lazy Bees</button>
 <div id="bees">
-  <hr>
-
   <app-bee  *ngFor="let bee of hive.bees" [bee]='bee'>Loading...</app-bee>
 </div>

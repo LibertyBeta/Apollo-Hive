@@ -1,0 +1,5 @@
+<app-queen-bee></app-queen-bee>
+<button (click)="purgeSwarm()">Purge the Lazy Bees</button>
+<div id="bees">
+  <app-bee-big *ngFor="let bee of swarm.bees" [bee]='bee'>Loading...</app-bee-big>
+</div>

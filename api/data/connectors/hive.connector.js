@@ -19,7 +19,7 @@ export default class HiveConnector {
     this.cacheTry = 0;
     this.lastWeather = {};
     this.weatherData = {};
-    this.weatherToken ="";
+    this.weatherToken ="5d89bc4fec8f1c69283ef285cdc4e024";
     this.Hives = HiveModel;
   }
 

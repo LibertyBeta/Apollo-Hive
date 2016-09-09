@@ -53,10 +53,42 @@ export default class BeeConnector {
     });
   }
 
+  hiveQueen(hiveId){
+    return this.queens.find({hive:hiveId}).exec().then(res=>{
+
+      return res[0]
+    });
+  }
+
   singleQueen(queenId){
     return this.queens.findById(queenId).exec().then(res=>{
 
       return res;
     });
+  }
+
+  purge(hiveID){
+    console.log(hiveID);
+    return this.bees.remove({hive:hiveID, producing:false}).exec().then(res=>{
+      console.log(res);
+      console.log("purged, getting remaining");
+      console.log(hiveID);
+      return this.bees.find({hive:hiveID}).exec().then(res=>{
+        console.log(res);
+        return res;
+      });
+    })
+  }
+
+  removeBee(beeID){
+    return this.bees.findById(beeID).exec().then(res=>{
+      let hiveId = res.hive;
+      return this.bees.findById(beeID).remove().exec().then(res=>{
+        return this.bees.find({hive:hiveId}).exec().then(res=>{
+          console.log(res);
+          return res;
+        })
+      })
+    })
   }
 }

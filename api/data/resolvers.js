@@ -12,6 +12,9 @@ const Resolvers = {
       console.log("QUEEN!", args);
       if(!args.id) console.log("qulf");
       return context.connectors.BeeConnector.singleQueen(args.id);
+    },
+    swarm(_,args,context){
+      return context.connectors.HiveConnector.single(args.id);
     }
 
   },
@@ -19,11 +22,10 @@ const Resolvers = {
 
   Mutation: {
     killBee(_, args, context){
-
-      return context.connectors.BeeConnector.remove(args.id);
+      return context.connectors.BeeConnector.removeBee(args.id);
     },
     purgeSwarm(_, args, context){
-      return context.connectors.BeeConnector.purge(args.hiveId);
+      return context.connectors.BeeConnector.purge(args.id);
     }
   },
 
@@ -62,7 +64,7 @@ const Resolvers = {
 
   QueenBee: {
     id:(_, args, context)=> _._id,
-    insceptDate:(_, args, context)=>new Date(_.inceptDate),
+    inceptDate:(_, args, context)=>new Date(_.inceptDate),
     qualtiy:(_, args, context)=>_.quality,
     notes: (_, args, context)=>{
       console.log(_.notes);
@@ -79,7 +81,8 @@ const Resolvers = {
 
 
   Swarm: {
-    bees: (_, args, context)=>{return context.connectors.BeeConnector.swarm(args.id);},
+    queen: (_,args,context)=> context.connectors.BeeConnector.hiveQueen(_.id),
+    bees: (_, args, context)=> context.connectors.BeeConnector.swarm(_.id),
   },
 
   HiveLocation: {

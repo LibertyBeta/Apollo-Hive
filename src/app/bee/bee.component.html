@@ -1,2 +1,1 @@
-<img [ngClass]="{'not-producing': bee.producing}" src="assets/bee.svg"/>
-<p>{{bee.name}}</p>
+<img [ngClass]="{'not-producing': !bee.producing}" src="assets/bee.svg" alt={{bee.id}}/>

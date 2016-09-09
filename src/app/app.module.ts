@@ -9,13 +9,14 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client';
 
 import { AppComponent } from './app.component';
 import { HiveComponent } from './hive/hive.component';
-import { BeeComponent } from './bee/bee.component';
+import { BeeComponent, BeeBigComponent } from './bee/bee.component';
 import { QueenComponent } from './queen/queen.component';
 import { HiveDetailsComponent } from './hive-details/hive-details.component';
 import { EmptyComponent } from './empty/empty.component';
 import { HiveListComponent } from './hive-list/hive-list.component';
 
 import { ChildWatchService } from './services/child-watch.service';
+import { SwarmComponent } from './swarm/swarm.component';
 
 
 const client = new ApolloClient({
@@ -27,10 +28,12 @@ const client = new ApolloClient({
     AppComponent,
     HiveComponent,
     BeeComponent,
+    BeeBigComponent,
     QueenComponent,
     HiveDetailsComponent,
     EmptyComponent,
-    HiveListComponent
+    HiveListComponent,
+    SwarmComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

@@ -23,6 +23,10 @@ export class HiveDetailsComponent implements OnInit {
     },
     queen:{
       id: null,
+    },
+    weather:{
+      condition: "loading...",
+      temperature: "loaindg..."
     }
 
     name:""
@@ -53,6 +57,12 @@ export class HiveDetailsComponent implements OnInit {
                 id
                 inceptDate
                 producing
+              }
+              weather{
+                condition
+                temperature
+                coniditonString
+                wind
               }
             }
           }
@@ -89,6 +99,30 @@ export class HiveDetailsComponent implements OnInit {
         this.hiveId.next(params['id'].toString());
         console.log(this.hiveId);
       });
+  }
+
+  purgeSwarm(){
+    this.angularApollo.mutate({
+      mutation: gql`
+        mutation purgeSwarm($id:String){
+          purgeSwarm(id:$id){
+            id
+            inceptDate
+            producing
+          }
+        }
+        `
+      ,
+      variables:{
+        id: this.hive.id
+      }
+    }
+    ).then((res)=>{
+      const { data } = res;
+      this.hive.bees = data.purgeSwarm;
+    }).catch((error) => {
+      console.log('there was an error sending the query', error);
+    });
   }
 
 }

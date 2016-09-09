@@ -19,6 +19,7 @@ const Schema = [`
     lat: Float,
     lng: Float
   }
+
   type HoneyHarvest {
     collectedOn: String ,
     amount: Float ,
@@ -28,7 +29,7 @@ const Schema = [`
 
   type QueenBee {
     id: String ,
-    insceptDate: String ,
+    inceptDate: String ,
     qualtiy: [String] ,
     notes: [String]!
   }
@@ -41,6 +42,7 @@ const Schema = [`
 
 
   type Swarm {
+    queen: QueenBee
     bees: [Bee]
   }
 
@@ -58,16 +60,18 @@ const Schema = [`
     hives: [Hive]
     hive (id: String): Hive
     queen(id: String): QueenBee
+    swarm(id: String): Swarm
 
   }
 
   type Mutation {
     killBee(
       id: String ,
-    ): Boolean,
+    ): [Bee],
     purgeSwarm(
       id: String,
-    ): Swarm
+    ): [Bee]
+
   }
 
   schema {

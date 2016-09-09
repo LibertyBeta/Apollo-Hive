@@ -11,3 +11,23 @@
   align-items: flex-start;
   flex-wrap: wrap;
 }
+
+#row-two{
+  display: flex;
+  app-queen{
+    background-color: yellow;
+    flex:2;
+    width: 75%!important;
+  }
+  #weather{
+    flex:1;
+    color:black;
+    min-height: 10rem;
+    padding: 0.2rem;
+    margin: 0.5rem;
+    background-color: white;
+    border-radius: 5px;
+
+    box-shadow:$nintendo-shadow;
+  }
+}

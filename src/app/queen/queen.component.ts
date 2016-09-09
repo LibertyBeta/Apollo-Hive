@@ -31,7 +31,7 @@ export class QueenComponent implements OnInit, OnChanges {
           {
             queen(id:$id){
               id
-              insceptDate
+              inceptDate
               notes
             }
           }

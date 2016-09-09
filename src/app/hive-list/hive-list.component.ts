@@ -33,7 +33,7 @@ export class HiveListComponent implements OnInit {
           }
           queen{
             id
-            insceptDate
+            inceptDate
           }
           lastCollection
           bees{
