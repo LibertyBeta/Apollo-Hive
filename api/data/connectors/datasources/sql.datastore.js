@@ -3,7 +3,7 @@ import Sequelize from 'sequelize';
 const db = new Sequelize('hives', null, null, {
   dialect: 'sqlite',
   storage: './hives.sqlite',
-  logging: false,
+  logging: true,
 });
 
 //SQL

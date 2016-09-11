@@ -1,0 +1,24 @@
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <td>
+        Harvest Id
+      </td>
+      <td>
+        Customer
+      </td>
+      <td>
+        Amount
+      </td>
+      <td>
+        Quality
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let harvest of harvests">
+      <td>{{harvest.id}}</td>
+      <td>{{harvest.customer}}</td>
+      <td>{{harvest.ammount}}</td>
+      <td>{{harvest.quality}}</td>
+    </tr>

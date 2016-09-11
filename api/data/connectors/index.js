@@ -2,6 +2,7 @@ import _ from "lodash";
 import casual from "casual";
 import HiveConnector from "./hive.connector";
 import BeeConnector from "./bee.connector";
+import HoneyHarvestConnector from "./honeyharvest.connector";
 import {db, HiveModel, CustomersModel, HoneyHarvestModel} from "./datasources/sql.datastore";
 import {Bees, Queens} from "./datasources/mongo.datastore";
 
@@ -12,7 +13,7 @@ db.sync({ force: true }).then(()=> {
     let customers = [];
     _.times(20, ()=>{
       return CustomersModel.create({
-        Name: casual.Name,
+        Name: casual.full_name,
         Address: casual.address,
       }).then(customer=> customers.push(customer));
     });
@@ -43,9 +44,9 @@ db.sync({ force: true }).then(()=> {
       _.times(5, ()=>{
         // console.log(Hive);
         return Hive.createHoneyharvest({
-          collectedOn: casual.unix_time ,
-          amount: 1,
-          qualtiy: 1,
+          CollectedOn: casual.unix_time,
+          Amount: casual.double(0.1, 12.0),
+          Quality: casual.letter,
         }).then(Honey => {
           _.times(5, ()=>{
             let randomCustomer = customers[Math.floor(Math.random()*customers.length)];
@@ -59,7 +60,8 @@ db.sync({ force: true }).then(()=> {
 
 const Connectors = {
   HiveConnector,
-  BeeConnector
+  BeeConnector,
+  HoneyHarvestConnector,
 };
 
 export default Connectors

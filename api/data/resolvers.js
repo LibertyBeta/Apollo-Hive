@@ -15,6 +15,9 @@ const Resolvers = {
     },
     swarm(_,args,context){
       return context.connectors.HiveConnector.single(args.id);
+    },
+    harvests(_,args,context){
+      return context.connectors.HoneyHarvestConnector.hiveHarvests(args.id);
     }
 
   },
@@ -56,9 +59,11 @@ const Resolvers = {
   },
 
   HoneyHarvest: {
+    id:(_, args, context)=>_.id,
+    customer:(_, args, context)=>_.Name,
     collectedOn:(_, args, context)=>_.CollectedOn,
     amount:(_, args, context)=> _.Amount,
-    quality:(_, args, context)=> _.Quality,
+    quality:(_, args, context)=> {console.log(_); return _.Quality},
   },
 
 
@@ -67,8 +72,6 @@ const Resolvers = {
     inceptDate:(_, args, context)=>new Date(_.inceptDate),
     qualtiy:(_, args, context)=>_.quality,
     notes: (_, args, context)=>{
-      console.log(_.notes);
-      console.log(typeof _.notes);
       return _.notes
     }
   },

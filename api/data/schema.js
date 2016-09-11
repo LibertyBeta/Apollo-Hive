@@ -21,6 +21,8 @@ const Schema = [`
   }
 
   type HoneyHarvest {
+    id: String,
+    customer: String,
     collectedOn: String ,
     amount: Float ,
     quality: String ,
@@ -61,13 +63,14 @@ const Schema = [`
     hive (id: String): Hive
     queen(id: String): QueenBee
     swarm(id: String): Swarm
+    harvests(id: String): [HoneyHarvest]
 
   }
 
   type Mutation {
     killBee(
       id: String ,
-    ): [Bee],
+    ): String,
     purgeSwarm(
       id: String,
     ): [Bee]

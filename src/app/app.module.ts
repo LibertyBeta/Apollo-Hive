@@ -17,6 +17,7 @@ import { HiveListComponent } from './hive-list/hive-list.component';
 
 import { ChildWatchService } from './services/child-watch.service';
 import { SwarmComponent } from './swarm/swarm.component';
+import { HarvestsComponent } from './harvests/harvests.component';
 
 
 const client = new ApolloClient({
@@ -33,7 +34,8 @@ const client = new ApolloClient({
     HiveDetailsComponent,
     EmptyComponent,
     HiveListComponent,
-    SwarmComponent
+    SwarmComponent,
+    HarvestsComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

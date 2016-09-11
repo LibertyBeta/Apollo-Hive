@@ -1,9 +1,10 @@
-import {db, HoneyHarvestModel} from "./datasources/sql.datastore"
+import {db, HoneyHarvestModel, CustomersModel} from "./datasources/sql.datastore"
 
 export default class HoneyHarvestConnector {
 
   constructor() {
     this.Harvests = HoneyHarvestModel;
+    this.Customers = CustomersModel;
   }
 
   id(arg){
@@ -30,6 +31,20 @@ export default class HoneyHarvestConnector {
 
   single(){
     return {};
+  }
+
+  hiveHarvests(hiveId){
+    return this.Customers.findAll({attributes: { exclude: ['id'] },include:[{model:HoneyHarvestModel, where:{hiveId:hiveId}}]}).then(findResult=>{
+      let flat = [];
+      for(let result of findResult){
+        let customer = result.get();
+        for(let harvest of customer.honeyharvests){
+          flat.push(Object.assign(harvest.get(), customer));
+        }
+
+      }
+      return flat;
+    })
   }
 
 }

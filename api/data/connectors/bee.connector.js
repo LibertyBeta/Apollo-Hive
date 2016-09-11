@@ -81,14 +81,11 @@ export default class BeeConnector {
   }
 
   removeBee(beeID){
-    return this.bees.findById(beeID).exec().then(res=>{
-      let hiveId = res.hive;
-      return this.bees.findById(beeID).remove().exec().then(res=>{
-        return this.bees.find({hive:hiveId}).exec().then(res=>{
-          console.log(res);
-          return res;
-        })
-      })
+    return this.bees.findById(beeID).remove().exec().then(res=>{
+      console.log(res);
+      return ["deadBee"];
     })
   }
+
+
 }
