@@ -1,6 +1,6 @@
 <h1> Details for Hive: {{hive.name}} </h1>
 Map:
-<sebm-google-map [latitude]="hive.location.lat" [longitude]="hive.location.lng" [zoom]="8" [styles]='terrain' [scrollwheel]=false [mapDraggable]=false style="height:300px;">
+<sebm-google-map class="box-wrapper" [latitude]="hive.location.lat" [longitude]="hive.location.lng" [zoom]="8" [styles]='terrain' [scrollwheel]=false [mapDraggable]=false style="height:300px;">
   <sebm-google-map-marker [latitude]="hive.location.lat" [longitude]="hive.location.lng" [label]="hive.name">
   </sebm-google-map-marker>
 </sebm-google-map>
@@ -9,6 +9,8 @@ Map:
   <app-queen [id]='queenId' [hiveName]='hive.name'>Loading...</app-queen>
   <div id="weather">
     {{hive.weather.condition}}
+
+    <i class="wi wi-forecast-io-{{hive.weather.coniditonString}}"></i>
     {{hive.weather.temperature}}
   </div>
 </div>

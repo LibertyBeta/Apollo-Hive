@@ -19,7 +19,7 @@ export default class HiveConnector {
     this.cacheTry = 0;
     this.lastWeather = {};
     this.weatherData = {};
-    this.weatherToken ="82e82374a4c30c191520628967b6641b";
+    this.weatherToken ="669e107fbadf26c41ac3d1baafd6368c";
     this.Hives = HiveModel;
   }
 
@@ -75,8 +75,8 @@ export default class HiveConnector {
 
   cacheWeather(id, weather){
     this.cacheTry++;
-    console.log('caching');
-    console.log(this.cacheTry);
+    // console.log('caching');
+    // console.log(this.cacheTry);
     let now = new Date();
     now.setMinutes(now.getMinutes() + 30);
     this.lastWeather[id] = now;
@@ -84,26 +84,26 @@ export default class HiveConnector {
   }
 
   weather(id, lat, lng){
-    console.log("getting Weather data");
+    // console.log("getting Weather data");
 
     return this.redis.getAsync(id).then((result)=>{
       let now = new Date();
       now.setMinutes(now.getMinutes() - 30);
       // console.log(Object.keys(result));
       result = JSON.parse(result);
-      console.log(result);
+      // console.log(result);
       if(result === null || result.checked < now.valueOf() ){
-        console.log("send data");
+        // console.log("send data");
         return Restling.get('https://api.forecast.io/forecast/'+this.weatherToken+'/'+lat+','+lng)
           .then((result)=>{
-            console.log("Got weather data");
+            // console.log("Got weather data");
             let currently = result.data.currently;
             currently['checked'] = (new Date()).valueOf();
             this.redis.set(id, JSON.stringify(currently));
             return currently;
           })
       } else {
-        console.log("sending stored data");
+        // console.log("sending stored data");
         return result;
       }
     })

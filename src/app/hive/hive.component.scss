@@ -1,14 +1,22 @@
 @import '../shared/bonbons.scss';
 :host{
+  @extend .box;
+  width: 15rem;
+}
+
+.controls{
   color:black;
-  // flex: 1;
-  padding: 0.2rem;
-  margin: 0.5rem;
-  // flex-basis: 10rem;
-  width: 10rem;
-  background-color: white;
-  border-radius: 5px;
-  // border: solid 1px black;
-  text-align: center;
-  box-shadow:$nintendo-shadow;
+  display: flex;
+  justify-content: space-between;
+  a{
+    margin: 0.1rem;
+    border-radius: 2px;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+    &:hover{
+      color: blue;
+      background-color: rgba($border-shade,.14);
+    }
+  }
 }

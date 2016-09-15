@@ -52,7 +52,7 @@ const Schema = [`
     condition: String,
     temperature: Float,
     coniditonString: String,
-    wind: String,
+    wind: String
   }
 
 

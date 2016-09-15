@@ -63,7 +63,7 @@ const Resolvers = {
     customer:(_, args, context)=>_.Name,
     collectedOn:(_, args, context)=>_.CollectedOn,
     amount:(_, args, context)=> _.Amount,
-    quality:(_, args, context)=> {console.log(_); return _.Quality},
+    quality:(_, args, context)=> { return _.Quality},
   },
 
 

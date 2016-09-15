@@ -1,5 +1,4 @@
 <section id="list">
-  <h1> Hives </h1>
-  <app-hive *ngFor="let hive of hives" [hive]=hive >loading...</app-hive>
+  <app-hive *ngFor="let hive of hives" [hive]=hive [ngClass]="{active: hive.id == focus}" >loading...</app-hive>
 </section>
 <router-outlet></router-outlet>

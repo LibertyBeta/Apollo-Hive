@@ -7,7 +7,7 @@ export class ChildWatchService {
   private kinderWatchers: Object{};
   constructor() { }
 
-  registerParent(component:string){
+  registerParent(component:any){
     let parentSubject:Subject = new Subject();
     kinderWatchers[component] = parentSubject;
 

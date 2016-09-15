@@ -56,7 +56,6 @@ export class SwarmComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = 'app works! for now';
 
     this.route.params.subscribe(params => {
       this.childWatcher.sendToParent(this.route.parent.component.name, params['id']);

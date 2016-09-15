@@ -8,7 +8,7 @@ export default class HoneyHarvestConnector {
   }
 
   id(arg){
-    console.log(arg);
+    // console.log(arg);
     return 0;
   }
 

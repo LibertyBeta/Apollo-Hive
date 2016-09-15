@@ -26,14 +26,14 @@ export class HiveDetailsComponent implements OnInit {
     },
     weather:{
       condition: "loading...",
-      temperature: "loaindg..."
-    }
+      temperature: "loaindg...",
+      coniditonString: "wi-cloud-refresh"
+    },
 
     name:""
   };
 
   constructor(private route: ActivatedRoute, private childWatcher: ChildWatchService, private angularApollo: Angular2Apollo) {
-    console.log(route.parent.component.name);
 
     this.hiveQuery = angularApollo.watchQuery({
       query: gql`
@@ -92,7 +92,6 @@ export class HiveDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.title = 'app works! for now';
 
       this.route.params.subscribe(params => {
         this.childWatcher.sendToParent(this.route.parent.component.name, params['id']);

@@ -14,7 +14,7 @@ export default class BeeConnector {
   }
 
   id(arg){
-    console.log(arg);
+    // console.log(arg);
     return 0;
   }
 
@@ -68,13 +68,13 @@ export default class BeeConnector {
   }
 
   purge(hiveID){
-    console.log(hiveID);
+    // console.log(hiveID);
     return this.bees.remove({hive:hiveID, producing:false}).exec().then(res=>{
-      console.log(res);
-      console.log("purged, getting remaining");
-      console.log(hiveID);
+      // console.log(res);
+      // console.log("purged, getting remaining");
+      // console.log(hiveID);
       return this.bees.find({hive:hiveID}).exec().then(res=>{
-        console.log(res);
+        // console.log(res);
         return res;
       });
     })
@@ -82,7 +82,7 @@ export default class BeeConnector {
 
   removeBee(beeID){
     return this.bees.findById(beeID).remove().exec().then(res=>{
-      console.log(res);
+      // console.log(res);
       return ["deadBee"];
     })
   }

@@ -2,7 +2,7 @@
 :host{
   height: 100%;
   overflow: scroll;
-  background-color:pink;
+  padding-top: 3rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -20,4 +20,8 @@
 h1{
   width: 100%;
   text-align: center;
+}
+
+.active{
+  background-color: red !important;
 }

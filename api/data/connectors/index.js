@@ -7,16 +7,19 @@ import {db, HiveModel, CustomersModel, HoneyHarvestModel} from "./datasources/sq
 import {Bees, Queens} from "./datasources/mongo.datastore";
 
 // casual.seed(123);
+Bees.remove({}, (e)=>{});
+Queens.remove({}, (e)=>{});
 db.sync({ force: true }).then(()=> {
-  _.times(10, ()=> {
+  let customers = [];
+  _.times(20, ()=>{
+    return CustomersModel.create({
+      Name: casual.full_name,
+      Address: casual.address,
+    }).then(customer=> customers.push(customer));
+  });
+  _.times(130, ()=> {
     //First, create a bunch of random CustomersModel
-    let customers = [];
-    _.times(20, ()=>{
-      return CustomersModel.create({
-        Name: casual.full_name,
-        Address: casual.address,
-      }).then(customer=> customers.push(customer));
-    });
+
 
     return HiveModel.create({
       Name: casual.title ,

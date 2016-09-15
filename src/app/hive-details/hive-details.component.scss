@@ -20,23 +20,21 @@
     width: 75%!important;
   }
   #weather{
-    flex:1;
-    color:black;
-    min-height: 10rem;
-    padding: 0.2rem;
-    margin: 0.5rem;
-    background-color: white;
-    border-radius: 5px;
 
-    box-shadow:$nintendo-shadow;
+    @extend .box;
+    padding-top: 1rem;
+    flex:1;
+    justify-content: center;
+    align-items: center;
+    .wi{
+      width: 100%;
+      font-size: 7rem;
+      margin-top: 2rem;
+    }
   }
 }
 
-.gm-style{
-  min-height: 10rem;
-  padding: 0.2rem;
-  margin: 0.5rem;
-  background-color: white;
-  border-radius: 5px;
-  box-shadow:$nintendo-shadow;
+.box-wrapper{
+  display: block;
+  @extend .box;
 }

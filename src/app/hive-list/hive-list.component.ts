@@ -27,20 +27,6 @@ export class HiveListComponent implements OnInit {
         hives{
           id
           name
-
-          harvests{
-            collectedOn
-          }
-          queen{
-            id
-            inceptDate
-          }
-          lastCollection
-          bees{
-            id
-            inceptDate
-            producing
-          }
         }
       }
       `,
@@ -48,11 +34,11 @@ export class HiveListComponent implements OnInit {
 
       }
     })
-      .then(({ data }) => {
-        console.log(data);
-        console.log(typeof data);
-        this.hives = data.hives;
-      });
+    .then(({ data }) => {
+      console.log(data);
+      console.log(typeof data);
+      this.hives = data.hives;
+    });
 
 
 
@@ -62,6 +48,7 @@ export class HiveListComponent implements OnInit {
     this.title = 'app works! for now';
     console.log(this.sub);
     this.sub.subscribe(value=>{
+      this.focus = value;
       console.log(value);
     });
   }

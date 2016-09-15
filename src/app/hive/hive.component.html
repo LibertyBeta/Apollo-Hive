@@ -1,5 +1,6 @@
-  <h1>{{hive.name}}</h1>
-  <a [routerLink]="['',hive.id]">Summary</a>
-  <a [routerLink]="['',hive.id,'details']">Details</a>
-  <a [routerLink]="['',hive.id,'harvests']">Harvests</a>
-  <a [routerLink]="['',hive.id,'bees']">Bees</a>
+  <h3>{{hive.name}}</h3>
+  <div class="controls">
+    <a [routerLink]="['',hive.id]">Summary</a>
+    <a [routerLink]="['',hive.id,'harvests']">Harvests</a>
+    <a [routerLink]="['',hive.id,'bees']">Bees</a>
+  </div>

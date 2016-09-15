@@ -42,7 +42,6 @@
     "express": "^4.14.0",
     "graphql": "^0.7.0",
     "graphql-tools": "^0.6.6",
-    "material-design-lite": "^1.2.1",
     "mongoose": "^4.6.0",
     "nodemon": "^1.10.2",
     "redis": "^2.6.2",
